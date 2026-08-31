@@ -6,7 +6,9 @@ public class ExtremeITProductsApp {
 
         Scanner input = new Scanner(System.in);
 
-        String[] codes = {" T12", "T43", "T44", "T01"};
+        
+
+        String[] codes = {"T12", "T43", "T44", "T01"};
 
         String[] names = {"IPHONE", "AIRPODS", "MACKBOOK", "IPAD"};
 
@@ -27,6 +29,8 @@ public class ExtremeITProductsApp {
             productsArr[i] = new products(codes[i], names[i], categories[i], warranties[i], prices[i], levels[i], suppliers[i]);
 
         }
+
+      
 
         System.out.println("PRODUCT REPORT");
 
@@ -78,11 +82,81 @@ public class ExtremeITProductsApp {
 
         System.out.println("AVERAGE PRODUCT VALUE: R " + (int)(totalValue / productsArr.length));
 
-        System.out.print("Enter (1) to launch menu: ");
-        
-        System.out.print("Enter (0) to exit menu: ");
+        // --- WORKING MENU ---
 
-        input.nextLine();
+        System.out.print("Enter (1) to launch menu: Enter (0) to exit menu: ");
+
+        String choice = input.nextLine();
+
+        while(choice.equals("1")){
+
+            System.out.println("\n--- EXTREME IT MENU ---");
+
+            System.out.println("1. Display All Products");
+
+            System.out.println("2. Search by Product Code");
+
+            System.out.println("3. Display Total Value");
+
+            System.out.println("0. Exit Menu");
+
+            System.out.print("Choose option: ");
+
+            int menu = Integer.parseInt(input.nextLine());
+
+            if(menu == 1){
+
+                for (int i = 0; i < productsArr.length; i++) {
+
+                    System.out.println((i+1)+ ". " + productsArr[i].productCode + " | " + productsArr[i].productName + " | " + productsArr[i].productCategory + " - R" + productsArr[i].productPrice);
+
+                }
+
+            }
+
+            else if(menu == 2){
+
+                System.out.print("Enter product code (T12,T43,T44,T01): ");
+
+                String search = input.nextLine();
+
+                boolean found = false;
+
+                for (int i = 0; i < productsArr.length; i++) {
+
+                    if(productsArr[i].productCode.equalsIgnoreCase(search.trim())){
+
+                        System.out.println("FOUND >> " + productsArr[i].productName + " | " + productsArr[i].productCategory + " | " + productsArr[i].productWarranty + " | R" + productsArr[i].productPrice + " | Supplier: " + productsArr[i].productSupplier);
+
+                        found = true;
+
+                    }
+
+                }
+
+                if(!found) System.out.println("Product not found");
+
+            }
+
+            else if(menu == 3){
+
+                System.out.println("TOTAL VALUE: R " + totalValue);
+
+            }
+
+            else if(menu == 0){
+
+                break;
+
+            }
+
+            System.out.print("\nEnter (1) to launch menu: Enter (0) to exit menu: ");
+
+            choice = input.nextLine();
+
+        }
+
+        System.out.println("Goodbye!");
 
     }
 
